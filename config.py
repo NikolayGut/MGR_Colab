@@ -43,7 +43,6 @@ feature = {
 }
 
 mel_6_14 = {
-mel_6_14 = {
 "mel_model_best": "/content/fma_small_part_train/checkpoint/mel_model_best_{}.pth.tar",
 "mel_checkpoint": "/content/fma_small_part_train/checkpoint/mel_checkpoint_{}.pth.tar",
 "mel_train_process_txt": "/content/fma_small_part_train/train_process_txt/mel_train_process_{}.txt",
