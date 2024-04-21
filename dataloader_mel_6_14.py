@@ -73,7 +73,7 @@ class datatype(object):
         return DataLoader(dataset, batch_size=16,shuffle=shuffle, num_workers=Config["normal_config"]["num_workers"])
     
     def load(self):
-        root = '/Users/nikolaygut/Desktop/Diploma/fma_small_part_feat/mel'
+        root = '/content/fma_small_part_feat/mel'
         #root = '/home/zwj/mgr/ballroom_feat/percussive'
         #root = '/home/zwj/mgr/ballroom_feat/harmonic'
         #root = '/home/zwj/mgr/ballroom_feat/cqt'
@@ -89,7 +89,7 @@ class datatype(object):
         return content
 
     def name_txt(self):
-        txt_root = '/Users/nikolaygut/Desktop/Diploma/fma_small_part_feat/10_split_txt'
+        txt_root = '/content/fma_small_part_feat/10_split_txt'
         train_txt = os.path.join(txt_root,'train_split_{}.txt'.format(self.fold))
         test_txt = os.path.join(txt_root,'test_split_{}.txt'.format(self.fold))
         train = list()
