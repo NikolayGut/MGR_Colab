@@ -72,7 +72,7 @@ def load_melspectrogram(filename):
     return new_slice
 
 if __name__ == '__main__':
-    root = '/Users/nikolaygut/Desktop/Diploma/Users/nikolaygut/Desktop/content/fma/data/fma_small'
+    root = '/content/fma/data/fma_small'
     dirs = ['000','001','002','003','004','005','006','007','008','009','010',
     '011','012','013','014','015','016','017','018','019','020','021','022','023',
     '024','025','026','027','028','029','030','031','032','033','034','035','036',
@@ -101,7 +101,7 @@ if __name__ == '__main__':
                     feat = load_melspectrogram(files_path[j])
                     print(files_path[j],feat[0].shape)
                     content[dirs[i]][files_path[j].split('/')[-1]] = feat
-            output_path = '/Users/nikolaygut/Desktop/Diploma/fma_small_part_feat/mel/{}.pkl'
+            output_path = '/content/fma_small_part_feat/mel/{}.pkl'
             output_path = output_path.format(dirs[i])
             with open(output_path, 'wb') as f:
                 dump(content, f)
