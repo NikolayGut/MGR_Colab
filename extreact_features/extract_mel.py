@@ -73,7 +73,7 @@ def load_melspectrogram(filename):
 
 if __name__ == '__main__':
     root = '/content/fma/data/fma_small'
-    dirs = ['000','001','002']
+    dirs = [000,001,002]
     for i in range(len(dirs)):
         if i>-1:
             path_dir = os.path.join(root,dirs[i])
