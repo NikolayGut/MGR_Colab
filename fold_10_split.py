@@ -18,7 +18,7 @@ def write_txt(list0, train_path, test_path, idx, dict0, genre):
                     line =genre + '\t' + list0[dict0[i][j]] + '\n'
                     f1.write(line)
 def split_10(path):
-    wr_root = '/Users/nikolaygut/Desktop/Diploma/fma_small_part_feat/10_split_txt'
+    wr_root = '/content/fma_small_part_feat/10_split_txt'
     genre = path.split('/')[-1]
     data = pickle.load(open(path,'rb'))
     genre = genre.split('.')[0]
@@ -44,7 +44,7 @@ def split_10(path):
         write_txt(name_list, train_path, test_path, i, dict_10, genre)
             
 if __name__ == "__main__":
-    root = '/Users/nikolaygut/Desktop/Diploma/fma_small_part_feat/mel'
+    root = '/content/fma_small_part_feat/mel'
     dirs = os.listdir(root)
     dirs.sort()
     for i in range(len(dirs)):
