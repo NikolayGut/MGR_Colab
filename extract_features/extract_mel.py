@@ -120,6 +120,6 @@ if __name__ == '__main__':
                     content[cleaned_dir_name][files_path[j].split('/')[-1]] = feat
             output_path = '/content/fma_small_part_feat/mel/{}.pkl'.format(cleaned_dir_name)
             if not os.path.exists(os.path.dirname(output_path)):
-            os.makedirs(os.path.dirname(output_path))
+                os.makedirs(os.path.dirname(output_path))
             with open(output_path, 'wb') as f:
                 dump(content, f)
