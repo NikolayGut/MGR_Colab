@@ -89,7 +89,6 @@ if __name__ == '__main__':
                     feat = load_melspectrogram(files_path[j])
                     print(files_path[j],feat[0].shape)
                     content[dirs[i]][files_path[j].split('/')[-1]] = feat
-            output_path = '/content/fma_small_part_feat/mel/{}.pkl'
-            output_path = output_path.format(dirs[i])
+            output_path = '/content/fma_small_part_feat/mel/{}.pkl'.format(dirs[i])
             with open(output_path, 'wb') as f:
                 dump(content, f)
