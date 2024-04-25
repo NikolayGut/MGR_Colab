@@ -73,7 +73,7 @@ def load_melspectrogram(filename):
 
 if __name__ == '__main__':
     root = '/content/fma/data/tracks_folder'
-    dirs = ['Electronic','Experimental','Folk','Hip-Hop','Instrumental','International','Pop','Rock']
+    dirs = ["Electronic","Experimental","Folk","Hip-Hop","Instrumental","International","Pop","Rock"]
     for i in range(len(dirs)):
         if i>-1:
             path_dir = os.path.join(root,dirs[i])
@@ -89,6 +89,7 @@ if __name__ == '__main__':
                     feat = load_melspectrogram(files_path[j])
                     print(files_path[j],feat[0].shape)
                     content[dirs[i]][files_path[j].split('/')[-1]] = feat
-            output_path = '/content/fma_small_part_feat/mel/{}.pkl'.format(dirs[i])
+            output_path = '/content/fma_small_part_feat/mel/{}.pkl'
+            output_path = output_path.format(dirs[i])
             with open(output_path, 'wb') as f:
                 dump(content, f)
