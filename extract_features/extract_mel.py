@@ -72,24 +72,24 @@ def load_melspectrogram(filename):
     return new_slice
 
 if __name__ == '__main__':
-    root = '/content/fma/data/tracks_folder'
-    dirs = ["Electronic","Experimental","Folk","Hip-Hop","Instrumental","International","Pop","Rock"]
+    root = '/content/fma/data/tracks_folder' 
+    dirs = ['Electronic','Experimental','Folk','Hip-Hop','Instrumental','International','Pop','Rock']
     for i in range(len(dirs)):
-        if i>-1:
-            path_dir = os.path.join(root,dirs[i])
+        if i > -1:
+            path_dir = os.path.join(root, dirs[i])
             print(path_dir)
             assert os.path.isdir(path_dir)
             if os.path.isdir(path_dir):
                 files = os.listdir(path_dir)
                 files.sort()
-                files_path = [ os.path.join(path_dir,files[k]) for k in range(len(files))]
+                files_path = [os.path.join(path_dir, files[k]) for k in range(len(files))]
                 content = dict()
-                content[dirs[i]]=dict()
+                cleaned_dir_name = dirs[i].replace(' ', '_')  # Заменяем пробелы на подчеркивания
+                content[cleaned_dir_name] = dict()
                 for j in range(len(files_path)):
                     feat = load_melspectrogram(files_path[j])
-                    print(files_path[j],feat[0].shape)
-                    content[dirs[i]][files_path[j].split('/')[-1]] = feat
-            output_path = '/content/fma_small_part_feat/mel/{}.pkl'
-            output_path = output_path.format(dirs[i])
+                    print(files_path[j], feat[0].shape)
+                    content[cleaned_dir_name][files_path[j].split('/')[-1]] = feat
+            output_path = '/content/fma_small_part_feat/mel/{}.pkl'.format(cleaned_dir_name)
             with open(output_path, 'wb') as f:
                 dump(content, f)
