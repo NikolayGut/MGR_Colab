@@ -72,8 +72,8 @@ def load_melspectrogram(filename):
     return new_slice
 
 if __name__ == '__main__':
-    root = '/content/fma/data/fma_small'
-    dirs = ['000','001','002']
+    root = '/content/fma/data/tracks_folder'
+    dirs = ['Electronic','Experimental','Folk','Hip-Hop','Instrumental','International','Pop','Rock']
     for i in range(len(dirs)):
         if i>-1:
             path_dir = os.path.join(root,dirs[i])
