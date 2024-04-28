@@ -9,7 +9,7 @@ normal_config = {
 "batch_size": 16,
 "num_workers": 8,
 #Multithreaded reading data
-"epoch_num": 400,
+"epoch_num": 200,
 "classes":['Electronic','Experimental','Folk','HipHop','Instrumental','International','Pop','Rock'],
 #the music genres need to be predicted
 "checkpoint": "/Users/nikolaygut/Desktop/Diploma/mgr/checkpoint",
