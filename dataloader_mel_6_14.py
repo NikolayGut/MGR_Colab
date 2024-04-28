@@ -89,7 +89,7 @@ class datatype(object):
         return content
 
     def name_txt(self):
-        txt_root = '/content/fma_small_part_feat/10_split_txt'
+        txt_root = '/content/drive/MyDrive/10_split_txt_fma'
         train_txt = os.path.join(txt_root,'train_split_{}.txt'.format(self.fold))
         test_txt = os.path.join(txt_root,'test_split_{}.txt'.format(self.fold))
         train = list()
