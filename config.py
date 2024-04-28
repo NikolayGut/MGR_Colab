@@ -10,7 +10,7 @@ normal_config = {
 "num_workers": 8,
 #Multithreaded reading data
 "epoch_num": 400,
-"classes":['Electronic','Experimental','Folk','Hip-Hop','Instrumental','International','Pop','Rock'],
+"classes":['Electronic','Experimental','Folk','HipHop','Instrumental','International','Pop','Rock'],
 #the music genres need to be predicted
 "checkpoint": "/Users/nikolaygut/Desktop/Diploma/mgr/checkpoint",
 "path_train": "/data/zwj/feature/cqt/train/cqt_train.pkl", 
