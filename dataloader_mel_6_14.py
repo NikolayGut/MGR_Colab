@@ -73,7 +73,7 @@ class datatype(object):
         return DataLoader(dataset, batch_size=16,shuffle=shuffle, num_workers=Config["normal_config"]["num_workers"])
     
     def load(self):
-        root = '/content/fma_small_part_feat/mel'
+        root = '/content/drive/MyDrive/mel'
         #root = '/home/zwj/mgr/ballroom_feat/percussive'
         #root = '/home/zwj/mgr/ballroom_feat/harmonic'
         #root = '/home/zwj/mgr/ballroom_feat/cqt'

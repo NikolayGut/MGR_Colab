@@ -44,7 +44,7 @@ def split_10(path):
         write_txt(name_list, train_path, test_path, i, dict_10, genre)
             
 if __name__ == "__main__":
-    root = '/content/fma_small_part_feat/mel'
+    root = '/content/drive/MyDrive/mel'
     dirs = os.listdir(root)
     dirs.sort()
     for i in range(len(dirs)):
