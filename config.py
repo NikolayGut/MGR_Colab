@@ -43,9 +43,9 @@ feature = {
 }
 
 mel_6_14 = {
-"mel_model_best": "/content/fma_small_part_train/checkpoint/mel_model_best_{}.pth.tar",
-"mel_checkpoint": "/content/fma_small_part_train/checkpoint/mel_checkpoint_{}.pth.tar",
-"mel_train_process_txt": "/content/fma_small_part_train/train_process_txt/mel_train_process_{}.txt",
+"mel_model_best": "/content/drive/MyDrive/mel_train_results/checkpoint/mel_model_best_{}.pth.tar",
+"mel_checkpoint": "/content/drive/MyDrive/mel_train_results/checkpoint/mel_checkpoint_{}.pth.tar",
+"mel_train_process_txt": "/content/drive/MyDrive/mel_train_results/train_process_txt/mel_train_process_{}.txt",
 "save_result" : "/Users/nikolaygut/Desktop/Diploma/mgr/extract_coding/mel/{}/mel_output_result_{}.pkl",
 "extract_feature": "/Users/nikolaygut/Desktop/Diploma/mgr/extract_coding/mel/{}/mel_extract_feature_{}.pkl"
 }
