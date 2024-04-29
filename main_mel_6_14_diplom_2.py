@@ -298,7 +298,7 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         feat_test[i] = dict()
     for batch_idx, ss in enumerate(val_loader):
         
-        print('dict_test', dict_test['000'].keys())
+        #print('dict_test', dict_test['000'].keys())
         print('check', batch_idx)
         melspectrogram  = ss[1].unsqueeze(1)
         path = ss[0]
