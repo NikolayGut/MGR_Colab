@@ -103,7 +103,7 @@ def main():
     
     print('    Total params: %.2fM' % (sum(p.numel() for p in model.parameters()) / 1000000.0))
     criterion = nn.CrossEntropyLoss().cuda()
-    criterion_cent = CenterLoss(num_classes=13, feat_dim=1024, use_gpu=True)
+    criterion_cent = CenterLoss(num_classes=8, feat_dim=1024, use_gpu=True)
     
     optimizer = optim.RMSprop(model.parameters(), lr=args.lr, alpha=0.9, eps=1.0, weight_decay=0.00004, momentum=0.9,
                               centered=False)
