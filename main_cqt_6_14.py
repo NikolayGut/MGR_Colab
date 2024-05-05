@@ -57,7 +57,7 @@ ff = Config["normal_config"]['fold_index']
 fold = ff# 1#3#2
 
 os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_id
-use_cuda = False #torch.cuda.is_available()
+use_cuda = torch.cuda.is_available()
 if args.manualSeed is None:
     args.manualSeed = random.randint(1, 10000)
 random.seed(args.manualSeed)
@@ -97,12 +97,12 @@ def main():
     #test_dataloader = train_dataloader
 
     model = model_audio()
-    #model = torch.nn.DataParallel(model).cuda()
+    model = torch.nn.DataParallel(model).cuda()
     cudnn.benchmark = True
     
     print('    Total params: %.2fM' % (sum(p.numel() for p in model.parameters()) / 1000000.0))
     criterion = nn.CrossEntropyLoss().cuda()
-    criterion_cent = CenterLoss(num_classes=13, feat_dim=1024, use_gpu=False)
+    criterion_cent = CenterLoss(num_classes=8, feat_dim=1024, use_gpu=True)
     
     optimizer = optim.RMSprop(model.parameters(), lr=args.lr, alpha=0.9, eps=1.0, weight_decay=0.00004, momentum=0.9,
                               centered=False)
