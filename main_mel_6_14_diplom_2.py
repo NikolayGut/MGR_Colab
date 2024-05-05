@@ -340,7 +340,7 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
     out_w = Config["mel_6_14"]["save_result"].format(mode,ff)
     feat_w = Config["mel_6_14"]["extract_feature"].format(mode,ff)
 
-    print('output_to_dict', dict_test)
+    #print('output_to_dict', dict_test)
     #write_to_pickle(dict_test,out_w)
     #write_to_pickle(feat_test,feat_w)
 
