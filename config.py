@@ -51,9 +51,9 @@ mel_6_14 = {
 }
 
 cqt_6_14 = {
-"cqt_model_best": "/Users/nikolaygut/Desktop/Diploma/fma_small_part_train/checkpoint/cqt_model_best_{}.pth.tar",
-"cqt_checkpoint": "/Users/nikolaygut/Desktop/Diploma/fma_small_part_train/checkpoint/cqt_checkpoint_{}.pth.tar",
-"cqt_train_process_txt": "/Users/nikolaygut/Desktop/Diploma/fma_small_part_train/train_process_txt/cqt_train_process_{}.txt",
+"cqt_model_best": "/content/drive/MyDrive/cqt_train_results/checkpoint/mel_model_best_{}.pth.tar",
+"cqt_checkpoint": "/content/drive/MyDrive/cqt_train_results/checkpoint/cqt_checkpoint_{}.pth.tar",
+"cqt_train_process_txt": "/content/drive/MyDrive/cqt_train_results/train_process_txt/cqt_train_process_{}.txt",
 "save_result" : "/Users/nikolaygut/Desktop/Diploma/mgr/extract_coding/cqt/{}/cqt_output_result_{}.pkl",
 "extract_feature": "/Users/nikolaygut/Desktop/Diploma/mgr/extract_coding/cqt/{}/cqt_extract_feature_{}.pkl"
 }
