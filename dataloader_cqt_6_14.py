@@ -73,10 +73,10 @@ class datatype(object):
         return DataLoader(dataset, batch_size=16,shuffle=shuffle, num_workers=Config["normal_config"]["num_workers"])
     
     def load(self):
-        #root = '/home/zwj/mgr/ballroom_feat/mel'
+        root = '/content/drive/MyDrive/cqt'
         #root = '/home/zwj/mgr/ballroom_feat/percussive'
         #root = '/home/zwj/mgr/ballroom_feat/harmonic'
-        root = '/content/drive/MyDrive/cqt'
+        #root = '/content/drive/MyDrive/cqt'
         dirs = os.listdir(root)
         dirs.sort()
         content = dict()
