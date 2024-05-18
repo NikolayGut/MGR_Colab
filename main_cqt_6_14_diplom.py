@@ -20,6 +20,8 @@ from model_cqt_6_14 import model_audio
 from dataloader_cqt_6_14 import datatype
 from config import Config
 from center_loss import CenterLoss
+from torchviz import make_dot
+
 
 model_names = sorted(name for name in models.__dict__
                      if name.islower() and not name.startswith("__")
@@ -149,6 +151,7 @@ def main():
     epoches = Config["normal_config"]["epoch_num"]
 
 
+
 def accuracy(output, target, topk=(1,)):
     """Computes the precision@k for the specified values of k"""
     maxk = max(topk)
@@ -206,6 +209,19 @@ def train(train_loader, model, criterion, criterion_cent, optimizer, optimizer_c
         for param in criterion_cent.parameters():
             param.grad.data *= (1. / 1e-4)
         optimizer_cent.step()
+
+        # Создайте фиктивный тензор для входных данных, чтобы построить граф
+        dummy_input = torch.randn(1, 1, features)  # Замените input_size на размер вашего входа
+
+        #   Получите выход модели для фиктивного входа
+        outputs, _ = model(torch.autograd.Variable(dummy_input))
+
+        # Создайте граф вычислений
+        dot = make_dot(outputs, params=dict(model.named_parameters()))
+
+        # Сохраните граф в файл или отобразите его
+        dot.render("neural_network_graph", format="png")  # Сохранить граф в файл
+        # dot.view()  # Отобразить граф во встроенном просмотрщике
         
     return (losses.avg, top1.avg)
 
