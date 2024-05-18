@@ -297,6 +297,7 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         feat_test[i] = dict()
     
     conv_layer = None
+    graph_created = False  # Флаг для отслеживания создания графа
 
     # Поиск первого сверточного слоя в модели
     for name, module in model.named_modules():
@@ -304,16 +305,6 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
             print(name)
             conv_layer = module
             break  # Прерываем цикл после нахождения первого сверточного слоя
-
-    if conv_layer is not None:
-            weights = conv_layer.weight.data
-            print("Weights of the convolutional layer:")
-            print(weights.size())
-
-            x = torch.randn((1,) + tuple(inputs.shape[1:])).requires_grad_(True)
-            y = model(x)
-            dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
-            dot.render("neural_network_graph", format="png")  # Сохраняем граф в файл
 
     for batch_idx, ss in enumerate(val_loader):
         
@@ -340,6 +331,17 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1[0].item(), inputs.size(0))
         dictMeter.update(dict_test)     
+
+        if conv_layer is not None and not graph_created:  # Создаем граф только если он еще не был создан
+            weights = conv_layer.weight.data
+            print("Weights of the convolutional layer:")
+            print(weights.size())
+
+            x = torch.randn((1,) + tuple(inputs.shape[1:])).requires_grad_(True)
+            y = model(x)
+            dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
+            dot.render("neural_network_graph", format="png")  # Сохраняем граф в файл
+            graph_created = True  # Устанавливаем флаг в True после создания графа
 
         if batch_idx % 10 == 0:
             print('test: {}/top1: {}/loss: {}'.format(batch_idx, top1.avg, losses.avg))
