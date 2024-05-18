@@ -337,7 +337,7 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
 
             x = torch.randn((1,) + tuple(inputs.shape[1:])).requires_grad_(True)
             y = model(x)
-            dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)])
+            dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
             dot.render("neural_network_graph", format="png")  # Сохраняем граф в файл
 
         if batch_idx % 10 == 0:
