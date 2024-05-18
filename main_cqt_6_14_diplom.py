@@ -292,7 +292,10 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
     classes.sort()
     dictMeter = DictMeter(classes)
     print('clear_dict')
-
+    for i in classes:
+        dict_test[i] = dict()
+        feat_test[i] = dict()
+    
     conv_layer = None
 
     # Поиск первого сверточного слоя в модели
@@ -302,20 +305,6 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
             conv_layer = module
             break  # Прерываем цикл после нахождения первого сверточного слоя
 
-    if conv_layer is not None:
-        weights = conv_layer.weight.data
-        print("Weights of the convolutional layer:")
-        print(weights.size())
-
-        x = torch.randn((1,) + tuple(inputs.shape[1:])).requires_grad_(True)
-        y = model(x)
-        dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
-        dot.render("neural_network_graph", format="png")  # Сохраняем граф в файл
-
-
-    for i in classes:
-        dict_test[i] = dict()
-        feat_test[i] = dict()
     for batch_idx, ss in enumerate(val_loader):
         
         melspectrogram  = ss[1].unsqueeze(1)
@@ -341,6 +330,16 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1[0].item(), inputs.size(0))
         dictMeter.update(dict_test)     
+
+        if conv_layer is not None:
+            weights = conv_layer.weight.data
+            print("Weights of the convolutional layer:")
+            print(weights.size())
+
+            x = torch.randn((1,) + tuple(inputs.shape[1:])).requires_grad_(True)
+            y = model(x)
+            dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
+            dot.render("neural_network_graph", format="png")  # Сохраняем граф в файл
 
         if batch_idx % 10 == 0:
             print('test: {}/top1: {}/loss: {}'.format(batch_idx, top1.avg, losses.avg))
