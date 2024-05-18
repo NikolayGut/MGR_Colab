@@ -324,7 +324,11 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         dictMeter.update(dict_test)     
 
         conv_layer = model[0]
-        print(conv_layer)
+
+        weights = conv_layer.weight.data
+        print("Веса сверточного слоя:")
+        print(weights)
+
 
         x = torch.randn(1, 3, 227, 227).requires_grad_(True)
         y = model(x)
