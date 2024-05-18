@@ -327,7 +327,7 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         for name, module in model.named_modules():
             if isinstance(module, torch.nn.Conv2d):
                 print(name)
-        conv_layer = model.conv1
+        conv_layer = model.module.conv1
 
         weights = conv_layer.weight.data
         print("Веса сверточного слоя:")
