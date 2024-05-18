@@ -333,7 +333,7 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         print("Веса сверточного слоя:")
         print(weights.size())
 
-        x = torch.randn(1, 1, weights).requires_grad_(True)
+        x = torch.randn(weights.size()).requires_grad_(True)
         y = model(x)
         dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
 
