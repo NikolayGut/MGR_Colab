@@ -323,6 +323,9 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         top1.update(prec1[0].item(), inputs.size(0))
         dictMeter.update(dict_test)     
 
+        conv_layer = model[0]
+        print(conv_layer)
+
         x = torch.randn(1, 3, 227, 227).requires_grad_(True)
         y = model(x)
         dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
