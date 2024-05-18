@@ -210,18 +210,6 @@ def train(train_loader, model, criterion, criterion_cent, optimizer, optimizer_c
             param.grad.data *= (1. / 1e-4)
         optimizer_cent.step()
 
-    # Создайте фиктивный тензор для входных данных, чтобы построить граф
-    dummy_input = torch.randn(1, 1, inputs)  # Замените input_size на размер вашего входа
-
-    # Получите выход модели для фиктивного входа
-    outputs, _ = model(torch.autograd.Variable(dummy_input))
-
-    # Создайте граф вычислений
-    dot = make_dot(outputs, params=dict(model.named_parameters()))
-
-    # Сохраните граф в файл или отобразите его
-    dot.render("neural_network_graph", format="png")  # Сохранить граф в файл
-    # dot.view()  # Отобразить граф во встроенном просмотрщике
     return (losses.avg, top1.avg)
 
 def feat_to_dict(output, path,dict_test):
@@ -349,6 +337,18 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
     #write_to_pickle(feat_test,feat_w)
 
     #return (losses.avg, top1.avg)
+    # Создайте фиктивный тензор для входных данных, чтобы построить граф
+    dummy_input = torch.randn(1, 1, inputs)  # Замените input_size на размер вашего входа
+
+    # Получите выход модели для фиктивного входа
+    outputs, _ = model(torch.autograd.Variable(dummy_input))
+
+    # Создайте граф вычислений
+    dot = make_dot(outputs, params=dict(model.named_parameters()))
+
+    # Сохраните граф в файл или отобразите его
+    dot.render("neural_network_graph", format="png")  # Сохранить граф в файл
+    # dot.view()  # Отобразить граф во встроенном просмотрщике
     return (losses.avg, acc1, dict_test)
 
 def adjust_learning_rate(optimizer, epoch):
