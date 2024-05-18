@@ -338,7 +338,7 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
 
     #return (losses.avg, top1.avg)
     # Создайте фиктивный тензор для входных данных, чтобы построить граф
-    dummy_input = torch.randn(32, 1, 1)  # Замените input_size на размер вашего входа
+    dummy_input = torch.randn(1, 32, 1, 1)  # Замените input_size на размер вашего входа
 
     # Получите выход модели для фиктивного входа
     outputs, _ = model(torch.autograd.Variable(dummy_input))
