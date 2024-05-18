@@ -321,7 +321,19 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1[0].item(), inputs.size(0))
-        dictMeter.update(dict_test)        
+        dictMeter.update(dict_test)     
+
+        # Создайте фиктивный тензор для входных данных, чтобы построить граф
+        dummy_input = torch.randn(32, 1, 1)  # Замените input_size на размер вашего входа
+
+        # Получите выход модели для фиктивного входа
+        outputs, _ = model(torch.autograd.Variable(dummy_input))
+
+        # Создайте граф вычислений
+        dot = make_dot(outputs, params=dict(model.named_parameters()))
+
+        # Сохраните граф в файл или отобразите его
+        dot.render("neural_network_graph", format="png")  # Сохранить граф в файл   
 
         if batch_idx%10==0:
             print('test:{}/top1:{}/loss:{}'.format(batch_idx,top1.avg,losses.avg))
@@ -337,17 +349,6 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
     #write_to_pickle(feat_test,feat_w)
 
     #return (losses.avg, top1.avg)
-    # Создайте фиктивный тензор для входных данных, чтобы построить граф
-    #dummy_input = torch.randn(1, 1, 1, 1)  # Замените input_size на размер вашего входа
-
-    # Получите выход модели для фиктивного входа
-    #outputs, _ = model(torch.autograd.Variable(dummy_input))
-
-    # Создайте граф вычислений
-    dot = make_dot(params=dict(model.named_parameters()))
-
-    # Сохраните граф в файл или отобразите его
-    dot.render("neural_network_graph", format="png")  # Сохранить граф в файл
     # dot.view()  # Отобразить граф во встроенном просмотрщике
     return (losses.avg, acc1, dict_test)
 
