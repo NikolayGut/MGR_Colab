@@ -323,6 +323,11 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         top1.update(prec1[0].item(), inputs.size(0))
         dictMeter.update(dict_test)     
 
+
+        for name, module in model.named_modules():
+            if isinstance(module, torch.nn.Conv2d):
+                print(name)
+
         conv_layer = model[0]
 
         weights = conv_layer.weight.data
