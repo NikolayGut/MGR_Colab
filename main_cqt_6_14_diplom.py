@@ -331,7 +331,7 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
 
         weights = conv_layer.weight.data
         print("Веса сверточного слоя:")
-        print(weights)
+        print(weights.size)
 
         x = torch.randn(1, 1, weights).requires_grad_(True)
         y = model(x)
