@@ -295,12 +295,12 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
 
     conv_layer = None
 
-        # Поиск первого сверточного слоя в модели
-        for name, module in model.named_modules():
-            if isinstance(module, torch.nn.Conv2d):
-                print(name)
-                conv_layer = module
-                break  # Прерываем цикл после нахождения первого сверточного слоя
+    # Поиск первого сверточного слоя в модели
+    for name, module in model.named_modules():
+        if isinstance(module, torch.nn.Conv2d):
+            print(name)
+            conv_layer = module
+            break  # Прерываем цикл после нахождения первого сверточного слоя
 
         if conv_layer is not None:
             weights = conv_layer.weight.data
@@ -312,7 +312,7 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
             dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
             dot.render("neural_network_graph", format="png")  # Сохраняем граф в файл
 
-    
+
     for i in classes:
         dict_test[i] = dict()
         feat_test[i] = dict()
