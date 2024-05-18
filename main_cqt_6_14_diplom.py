@@ -278,6 +278,9 @@ def output_to_csv(dict_test, f):
     #f.close()
 # created 6.05.24
 
+import torch
+from torchviz import make_dot
+
 def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_name='xxx.csv'):
     f = open(file_name, "w")
     losses = AverageMeter()
@@ -300,61 +303,48 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         inputs = melspectrogram
         if use_cuda:
             inputs, targets = inputs.cuda(), targets.cuda()
-            inputs =  torch.autograd.Variable(inputs,requires_grad=False)
-            targets = torch.autograd.Variable(targets,requires_grad=False)
-            #inputs = torch.autograd.Variable(inputs.cuda(async=True),volatile=True)
-            #targets = torch.autograd.Variable(targets.cuda(async=True),volatile=True)
-        #inputs, targets = torch.autograd.Variable(inputs, volatile=True), torch.autograd.Variable(targets)
+            inputs =  torch.autograd.Variable(inputs, requires_grad=False)
+            targets = torch.autograd.Variable(targets, requires_grad=False)
         
         with torch.no_grad():
-            #outputs = model(inputs)
-            outputs,feat = model(inputs)
+            outputs, feat = model(inputs)
             loss_soft = criterion(outputs, targets)
             loss_cent = criterion_cent(feat, targets)
-            loss = loss_soft + 1e-4*loss_cent
+            loss = loss_soft + 1e-4 * loss_cent
 
-        acc1 = output_to_dict(outputs.data.cpu().numpy(),path,dict_test)
-        #feat_to_dict(feat.data.cpu().numpy(),path,feat_test)
-        loss = criterion(outputs, targets)
-        prec1= accuracy(outputs.data, targets.data, topk=(1,))
+        acc1 = output_to_dict(outputs.data.cpu().numpy(), path, dict_test)
         
+        loss = criterion(outputs, targets)
+        prec1 = accuracy(outputs.data, targets.data, topk=(1,))
         
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1[0].item(), inputs.size(0))
         dictMeter.update(dict_test)     
 
-
         for name, module in model.named_modules():
             if isinstance(module, torch.nn.Conv2d):
                 print(name)
-        conv_layer = model.module.conv1
+                conv_layer = module
 
-        weights = conv_layer.weight.data
-        print("Веса сверточного слоя:")
-        print(weights.size())
+                weights = conv_layer.weight.data
+                print("Weights of the convolutional layer:")
+                print(weights.size())
 
-        x = torch.randn(weights.size()).requires_grad_(True)
-        y = model(x)
-        dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
+                x = torch.randn((1,) + tuple(inputs.shape[1:])).requires_grad_(True)
+                y = model(x)
+                dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
+                dot.render("neural_network_graph", format="png")  # Save the graph to a file
 
-        # Сохраните граф в файл или отобразите его
-        dot.render("neural_network_graph", format="png")  # Сохранить граф в файл   
+        if batch_idx % 10 == 0:
+            print('test: {}/top1: {}/loss: {}'.format(batch_idx, top1.avg, losses.avg))
 
-        if batch_idx%10==0:
-            print('test:{}/top1:{}/loss:{}'.format(batch_idx,top1.avg,losses.avg))
-    #import pudb;pu.db
     output_to_csv(dict_test, f)
     f.close()
 
-    mode = 'test'#'test'#'train'
-    out_w = Config["cqt_6_14"]["save_result"].format(mode,ff)
-    feat_w = Config["cqt_6_14"]["extract_feature"].format(mode,ff)
+    mode = 'test'
+    out_w = Config["cqt_6_14"]["save_result"].format(mode, ff)
+    feat_w = Config["cqt_6_14"]["extract_feature"].format(mode, ff)
 
-    #write_to_pickle(dict_test,out_w)
-    #write_to_pickle(feat_test,feat_w)
-
-    #return (losses.avg, top1.avg)
-    # dot.view()  # Отобразить граф во встроенном просмотрщике
     return (losses.avg, acc1, dict_test)
 
 def adjust_learning_rate(optimizer, epoch):
