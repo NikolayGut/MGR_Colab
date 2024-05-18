@@ -323,14 +323,9 @@ def test(val_loader, model, criterion, criterion_cent, epoch, use_cuda, file_nam
         top1.update(prec1[0].item(), inputs.size(0))
         dictMeter.update(dict_test)     
 
-        # Создайте фиктивный тензор для входных данных, чтобы построить граф
-        dummy_input = torch.randn(1, 32, 1, 1)  # Замените input_size на размер вашего входа
-
-        # Получите выход модели для фиктивного входа
-        outputs, _ = model(torch.autograd.Variable(dummy_input))
-
-        # Создайте граф вычислений
-        dot = make_dot(outputs, params=dict(model.named_parameters()))
+        x = torch.randn(1, 3, 227, 227).requires_grad_(True)
+        y = model(x)
+        dot = make_dot(y, params=dict(list(model.named_parameters()) + [('input', x)]))
 
         # Сохраните граф в файл или отобразите его
         dot.render("neural_network_graph", format="png")  # Сохранить граф в файл   
