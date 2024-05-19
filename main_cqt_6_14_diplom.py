@@ -159,6 +159,7 @@ def main():
     epoches = Config["normal_config"]["epoch_num"]
 
     # Создайте пример входных данных
+    model = model_audio()
     example_input = torch.randn(1, 1, 32, 32)
 
     # Визуализируем архитектуру своей модели
