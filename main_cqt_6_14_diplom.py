@@ -158,7 +158,7 @@ def main():
 
 
     # Визуализируем архитектуру своей модели
-    model_graph = draw_graph(model, example_input, save_graph=True, filename="neural_network_graph", directory= '/Users/nikolaygut/Desktop/Diploma/results_cqt_copy',)
+    model_graph = draw_graph(model, example_input, save_graph=True, filename="neural_network_graph_test", directory= '/content/MGR_Colab',)
     model_graph.visual_graph
 
     print("Схема нейронной сети сохранена в файл neural_network_graph.png")
