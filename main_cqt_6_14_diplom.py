@@ -156,7 +156,7 @@ def main():
 
     # После обучения модели и перед завершением функции main() добавьте следующий код:
     graph = torchview.draw_graph(model, example_input)  
-    graph.save("neural_network_graph_1.png")  # Сохранение схемы в файл
+    torchview.draw_graph_to_file(graph, "neural_network_graph_1.png")  # Сохранение схемы в файл
 
     print("Схема нейронной сети сохранена в файл neural_network_graph.png")
 
