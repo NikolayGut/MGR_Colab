@@ -15,6 +15,7 @@ import torch.utils.data as data
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.models as models
+import torchview
 
 from model_cqt_6_14 import model_audio
 from dataloader_cqt_6_14 import datatype
@@ -149,6 +150,12 @@ def main():
     print('train_loss:{}, train_acc:{}'.format(train_loss, train_acc))
     #return
     epoches = Config["normal_config"]["epoch_num"]
+
+    # После обучения модели и перед завершением функции main() добавьте следующий код:
+    graph = torchview.draw_graph(model, input_shape=(1, 1024))  # Здесь указывается размер входных данных
+    graph.save("neural_network_graph_1.png")  # Сохранение схемы в файл
+
+print("Схема нейронной сети сохранена в файл neural_network_graph.png")
 
 
 
