@@ -18,6 +18,11 @@ import torchvision.models as models
 import torchview
 
 from torchview import draw_graph
+import graphviz
+
+# when running on VSCode run the below command
+# svg format on vscode does not give desired result
+graphviz.set_jupyter_format('png')
 
 from model_cqt_6_14 import model_audio
 from dataloader_cqt_6_14 import datatype
