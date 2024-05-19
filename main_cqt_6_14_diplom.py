@@ -10,7 +10,7 @@ import torch
 import torch.nn as nn
 import torch.nn.parallel
 import torch.backends.cudnn as cudnn
-import torch.optim as optim
+import torch.optim as optimы
 import torch.utils.data as data
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
@@ -151,11 +151,14 @@ def main():
     #return
     epoches = Config["normal_config"]["epoch_num"]
 
+    # Создайте пример входных данных
+    example_input = torch.randn(1, 1024)  # Пример входных данных размером 1x1024
+
     # После обучения модели и перед завершением функции main() добавьте следующий код:
-    graph = torchview.draw_graph(model, input_shape=(1, 1024))  # Здесь указывается размер входных данных
+    graph = torchview.draw_graph(model, example_input)  
     graph.save("neural_network_graph_1.png")  # Сохранение схемы в файл
 
-print("Схема нейронной сети сохранена в файл neural_network_graph.png")
+    print("Схема нейронной сети сохранена в файл neural_network_graph.png")
 
 
 
