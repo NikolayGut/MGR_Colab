@@ -17,6 +17,8 @@ import torchvision.datasets as datasets
 import torchvision.models as models
 import torchview
 
+from torchview import draw_graph
+
 from model_cqt_6_14 import model_audio
 from dataloader_cqt_6_14 import datatype
 from config import Config
