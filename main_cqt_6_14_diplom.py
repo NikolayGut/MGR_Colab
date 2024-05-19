@@ -154,10 +154,9 @@ def main():
     # Создайте пример входных данных
     example_input = torch.randn(1, 1, 32, 32)
 
-    output = model(example_input)  # Прогоните пример входных данных через модель
-    graph = make_dot(output, params=dict(model.named_parameters()))  # Создание графа модели
-    graph.render("neural_network_graph_1", format="png")  # Сохранение графа в файл
-
+    # После обучения модели и перед завершением функции main() добавьте следующий код:
+    graph = torchview.draw_graph(model, example_input)  
+    graph.save("neural_network_graph_1.png")  # Сохранение схемы в файл
 
     print("Схема нейронной сети сохранена в файл neural_network_graph.png")
 
