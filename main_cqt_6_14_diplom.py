@@ -156,9 +156,8 @@ def main():
     # Создайте пример входных данных
     example_input = torch.randn(1, 1, 32, 32)
 
-
     # Визуализируем архитектуру своей модели
-    model_graph = draw_graph(model, example_input, save_graph=True, filename="neural_network_graph_test", directory= '/content/MGR_Colab',)
+    model_graph = draw_graph(model, example_input, save_graph=True, filename="neural_network_graph_test", directory= '/content/MGR_Colab', format='png')
     model_graph.visual_graph
 
     print("Схема нейронной сети сохранена в файл neural_network_graph.png")
