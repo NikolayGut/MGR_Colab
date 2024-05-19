@@ -152,7 +152,7 @@ def main():
     epoches = Config["normal_config"]["epoch_num"]
 
     # Создайте пример входных данных
-    example_input = torch.randn(1, 1024)  # Пример входных данных размером 1x1024
+    example_input = torch.randn(1, 1, 32, 32)
 
     # После обучения модели и перед завершением функции main() добавьте следующий код:
     graph = torchview.draw_graph(model, example_input)  
